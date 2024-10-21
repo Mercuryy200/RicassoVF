@@ -1,6 +1,6 @@
 </div>
-<hr>
 <div class="footer">
+    <hr>
     <div class="footerLinks">
         <div class="infoFooter">
             <h4>À PROPOS</h4>

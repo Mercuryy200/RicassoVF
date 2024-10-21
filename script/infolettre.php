@@ -3,7 +3,8 @@
 $pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
 
 // Traitement du formulaire d'inscription
-$message = '';
+$error= '';
+$message= '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         
         if ($stmt->rowCount() > 0) {
-            $message = "Vous êtes déjà inscrit à l'infolettre.";
+            $error = "Vous êtes déjà inscrit à l'infolettre.";
         } else {
             // Inscription à l'infolettre
             $query = "INSERT INTO infolettre (email, prenom) VALUES (:email, :prenom)";
@@ -26,11 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 $message = "Inscription réussie ! Vous recevrez bientôt nos nouveautés.";
             } else {
-                $message = "Une erreur s'est produite. Veuillez réessayer.";
+                $error = "Une erreur s'est produite. Veuillez réessayer.";
             }
         }
     } else {
-        $message = "Adresse e-mail invalide.";
+        $error = "Adresse e-mail invalide.";
     }
 }
 ?>
@@ -49,6 +50,7 @@ require "header.php";
 
 <div class="infoForm">
     <h2>INFOLETTRE</h2>
+    <?php if(empty($message)): ?>
     <p>Recevez en exclusivité nos dernières nouveautés, promotions et collections en avant-première!</p>
     <form method="POST" action="">
         <label for="email">Votre adresse e-mail :</label>
@@ -60,10 +62,16 @@ require "header.php";
         </div>
          <button type="submit" class="signupBtn">S'INSCRIRE</button>
     </form>
+    <?php else: ?>
+    <span class="message"> Inscription réussie ! Vous recevrez bientôt nos nouveautés. </span>
+    <?php endif;?>
+    <?php if(!empty($error)): ?>
+    <span class="error"><?= $error ?></span>
+    <?php endif; ?>
 </div>
 
 
-<p><?= $message ?></p>
+
 
 <?php
 require "footer.php";

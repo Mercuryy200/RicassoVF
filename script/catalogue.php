@@ -53,10 +53,10 @@ require "header.php";
             <option value="cravate">CRAVATES</option>
             <option value="chemise">CHEMISES</option>
         </select>
-
         <label for="taille">TAILLE :</label>
         <select name="taille" id="taille">
             <option value="">TOUTES</option>
+            <option value="O/S">O/S</option>
             <?php for ($i = 44; $i <= 56; $i += 2): ?>
                 <option value="<?= $i ?>"><?= $i ?></option>
             <?php endfor; ?>
@@ -64,16 +64,24 @@ require "header.php";
         <label for="couleur">COULEUR :</label>
         <input type="text" name="couleur" id="couleur">
         <label for="prix_min">PRIX MIN :</label>
-        <input type="number" name="prix_min" id="prix_min"  value="0">
+        <input type="number" name="prix_min" id="prix_min" value="0">
         <label for="prix_max">PRIX MAX :</label>
         <input type="number" name="prix_max" id="prix_max" value="9999">
         <button type="submit" class="filterBtn">FILTRER</button>
     </form>
 </div>
 <div class="overlay" id="myOverlay" onclick="closeSidebar()"></div>
-<h2>Catalogue des produits</h2>
 <hr>
-<span class='filter' style="cursor:pointer" onclick="openNav()"><i class="fa-solid fa-filter"></i> Filters</span>
+<div class="sort">
+    <h3>PRODUIT</h3>
+    <a href="">Afficher Tous</a>
+    <a href="">Chemises</a>
+    <a href="">Cravates</a>
+</div>
+<hr>
+<div class="filterSort">
+    <span class='filter' style="cursor:pointer" onclick="openNav()"><i class="fa-solid fa-filter"></i> Filters</span>
+</div>
 <hr>
 <div class="products">
     <?php foreach ($produits as $produit):
@@ -85,8 +93,8 @@ require "header.php";
         <div class='prix'>$ {$produit['prix']}</div>
         </div>
         </a>";
-        endforeach;
-        ?>
+    endforeach;
+    ?>
 </div>
 <script>
     function openNav() {

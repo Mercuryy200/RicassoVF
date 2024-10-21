@@ -40,7 +40,7 @@ require "header.php";
             <p>$ <?= $produit['prix'] ?></p>
         </div>
         <p><?= $produit['description'] ?></p>
-        <p><strong>Couleurs : <?= $produit['couleur'] ?></p>
+        <p>Couleurs : <?= $produit['couleur'] ?></p>
         <?php if ($produit['type'] === 'chemise'): ?>
             <p>Taille : <?= $produit['taille'] ?></p>
         <?php else: ?>

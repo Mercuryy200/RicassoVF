@@ -14,11 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($utilisateur && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
         $_SESSION['utilisateur_id'] = $utilisateur['id'];
-        $message= "Connexion réussie !";
         header("Location: profile.php");
         exit();
     } else {
-        $message = "Identifiants invalides.";
+        $message = "Information invalides.";
     }
 }
 ?>
@@ -29,12 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <span class="required">Obligatoire*</span>
             <input type="email" id="courriel" name="courriel" placeholder="Adresse e-mail*" required>
             <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe*" required>
+            <?php echo "<span class='error'>$message</span>"?>
             <div class="afficherMDP">
                 <input type="checkbox" name="chkbx" id="chkbx" onclick="passwordVisibility()">
                 <span>Afficher Mot de passe</span>
             </div>
             <input type="submit" value="CONNEXION">
         </form>
+
     </div>
     <hr>
     <div class="signupCont">

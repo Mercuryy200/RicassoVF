@@ -35,6 +35,10 @@ try {
         <input type="text" id="nom" name="nom" placeholder="Nom*" required>
         <input type="email" id="courriel" name="courriel" placeholder="Adresse e-mail*" required>
         <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de Passe*" required>
+        <div class="afficherMDP">
+            <input type="checkbox" name="chkbx" id="chkbx" onclick="passwordVisibility()">
+            <span>Afficher Mot de passe</span>
+        </div>
         <div class="checkbx">
             <input type="checkbox">
             <label>Je consens à recevoir des offres et des propositions basées sur mes préférences conformément à la Politique de confidentialité de Versace.</label>
@@ -42,6 +46,15 @@ try {
         <button type="submit" class="signupBtn">S'INSCRIRE</button>
     </form>
 </div>
-
+<script>
+    function passwordVisibility() {
+        var x = document.getElementById("mot_de_passe");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 <?php include 'footer.php'; ?>

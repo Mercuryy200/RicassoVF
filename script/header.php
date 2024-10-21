@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-include 'db.php'; // Incluez le fichier de connexion à la base de données
+$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
 
 // Vérifiez si l'utilisateur est connecté
 $utilisateurConnecte = false;

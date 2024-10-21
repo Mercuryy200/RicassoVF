@@ -30,7 +30,7 @@ body {
     text-decoration: none;
 }
 
-.navbar a:hover:not(.leftNav.navh1){
+.navbar a:hover:not(.navh1){
     background-color: #ddd;
     color: black;
 }
@@ -310,7 +310,7 @@ a:visited, a:link{
     flex-direction: column;
 }
 
-.connexion input[type=password], .connexion input[type=text], .connexion input[type=email], .infoForm input[type=text]{
+.connexion input[type=password], .connexion input[type=text], .connexion input[type=email], .infoForm input[type=text], .infoForm input[type=email]{
     margin-bottom: 2rem;
     color: #212121;
     font-size: 1.1rem;
@@ -384,7 +384,7 @@ a:visited, a:link{
     width: 50%;
     padding: 3rem;
 }
-.modifyUser{
+.modifyUser , .modifyPass{
     padding: 3rem;
     float:right;
     flex-direction: column;
@@ -427,12 +427,46 @@ a:visited, a:link{
     cursor: pointer;
     outline: inherit;
 }
+.error{
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.sort{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+.sort a{
+    margin: 1rem;
+}
+
+.sort a:hover{
+    text-decoration: underline;
+
+}
 
 @media screen and (max-width: 600px){
     .user{
         flex-wrap: wrap;
     }
     .userLeft, .modifyUser{
+        width: 100%;
+    }
+    .login-main-section{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .loginCont,
+    .signupCont{
+      width: 100%;
+        margin:0;
+    }
+    .descripBox{
+        flex-direction: column;
+    }
+    .galerie-images, .description-produit{
         width: 100%;
     }
 }
