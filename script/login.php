@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <span class="required">Obligatoire*</span>
             <input type="email" id="courriel" name="courriel" placeholder="Adresse e-mail*" required>
             <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe*" required>
-            <?php echo "<span class='error'>$message</span>"?>
+            <?php echo "<span class='error'>$message</span>" ?>
             <div class="afficherMDP">
                 <input type="checkbox" name="chkbx" id="chkbx" onclick="passwordVisibility()">
                 <span>Afficher Mot de passe</span>
@@ -44,7 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="avantages">
             <ul class="benefits">
                 <li><i class="fa-regular fa-envelope"></i> Découvrir les dernières actualités et offres exclusive</li>
-                <li><i class="fa-solid fa-bag-shopping"></i> Consulter l'historique de vos commandes et les adresses enregistrées</li>
+                <li><i class="fa-solid fa-bag-shopping"></i> Consulter l'historique de vos commandes et les adresses
+                    enregistrées
+                </li>
                 <li><i class="fa-regular fa-heart"></i> Enregistrer des articles dans votre WishList</li>
                 <li><i class="fa-regular fa-credit-card"></i> Paiement plus rapide</li>
             </ul>

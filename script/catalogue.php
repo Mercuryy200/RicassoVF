@@ -48,6 +48,19 @@ require "header.php";
     <form class='filterForm' method="GET" action="catalogue.php">
         <h3>FILTER</h3>
         <label for="type">TYPE :</label>
+        <div class="typeChkbx">
+            <input type="checkbox" name="tous" id="tous" value="">
+            <label for="tous">TOUS</label>
+            <br>
+            <input type="checkbox" name="chemise" id="chemise" value="chemise">
+            <label for="chemise">CHEMISE</label>
+            <br>
+            <input type="checkbox" name="cravate" id="cravate" value="cravate">
+            <label for="cravate">CRAVATE</label>
+        </div>
+        <div class="tailleChkbx">
+            
+        </div>
         <select name="type" id="type">
             <option value="">TOUS</option>
             <option value="cravate">CRAVATES</option>
@@ -70,13 +83,13 @@ require "header.php";
         <button type="submit" class="filterBtn">FILTRER</button>
     </form>
 </div>
-<div class="overlay" id="myOverlay" onclick="closeSidebar()"></div>
+<div class="overlay" id="myOverlay" onclick="closeNav()"></div>
 <hr>
 <div class="sort">
     <h3>PRODUIT</h3>
-    <a href="">Afficher Tous</a>
-    <a href="">Chemises</a>
-    <a href="">Cravates</a>
+    <a href="catalogue.php">Afficher Tous</a>
+    <a href="catalogue.php?type=chemise">Chemises</a>
+    <a href="catalogue.php?type=cravate">Cravates</a>
 </div>
 <hr>
 <div class="filterSort">
@@ -88,7 +101,7 @@ require "header.php";
         echo "
     <a href='produit.php?id={$produit['id']}' class='product' id='{$produit['id']}'>
     <div class='productBox' id='{$produit['id']}'>
-        <img src='../images/${produit['image']}' alt='produit{$produit['nom']}'>
+        <img src='../images/{$produit['image']}' alt='produit{$produit['nom']}'>
         <h3>{$produit['nom']}</h3>
         <div class='prix'>$ {$produit['prix']}</div>
         </div>

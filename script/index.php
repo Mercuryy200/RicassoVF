@@ -15,18 +15,18 @@ require "header.php";
 
         <div class="mySlides fade">
             <div class="numbertext">2 / 4</div>
-            <div class="txt" > this is a test </div>
+            <div class="txt" > Une cravatte d'édition limitée disponible en prevente pour les membres de RICASSO &copy; </div>
             <img src="../images/tie3.webp" style="width:50%;" alt="tie3">
         </div>
 
         <div class="mySlides fade">
             <div class="numbertext">3 / 4</div>
             <img src="../images/tshirt5.webp" style="width:50%" alt="tshirt5">
-            <div class="txt" > this is a test </div>
+            <div class="txt" > Une chemise d'édition limitée disponible en prevente pour les membres de RICASSO &copy; </div>
         </div>
         <div class="mySlides fade">
             <div class="numbertext">3 / 4</div>
-            <div class="txt" > this is a test </div>
+            <div class="txt" > Une chemise d'édition limitée disponible en prevente pour les membres de RICASSO &copy;  </div>
             <img src="../images/tshirt2.webp" style="width:50%" alt="tshirt2">
 
         </div>

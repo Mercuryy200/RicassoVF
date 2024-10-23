@@ -39,13 +39,28 @@ require "header.php";
             <h1><?= $produit['nom'] ?></h1>
             <p>$ <?= $produit['prix'] ?></p>
         </div>
+        <hr>
         <p><?= $produit['description'] ?></p>
-        <p>Couleurs : <?= $produit['couleur'] ?></p>
-        <?php if ($produit['type'] === 'chemise'): ?>
-            <p>Taille : <?= $produit['taille'] ?></p>
-        <?php else: ?>
-            <p>Taille : <?= $produit['taille'] ?></p>
-        <?php endif; ?>
+        <hr>
+        <p>COULEURS:</p>
+        <div class="colors">
+            <?php
+            $couleurs = explode(' ', $produit['couleur']);
+            foreach ($couleurs as $couleur) {
+                echo "<div class='color' id='$couleur'></div>";
+            }
+            ?>
+        </div>
+        <hr>
+        <p>TAILLES:</p>
+        <div class="sizes">
+                <?php
+                $tailles = explode(' ', $produit['taille']);
+                foreach ($tailles as $taille) {
+                    echo "<div class='taille'>$taille</div>";
+                }
+                ?>
+            </div>
     </div>
 </div>
 
