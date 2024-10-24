@@ -1,7 +1,5 @@
 <?php
-// Connexion à la base de données
-$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
-
+require "header.php";
 // Traitement du formulaire d'inscription
 $error= '';
 $message= '';
@@ -35,18 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Inscription à l'infolettre</title>
-</head>
-
-<?php
-require "header.php";
-?>
-
 
 <div class="infoForm">
     <h2>INFOLETTRE</h2>

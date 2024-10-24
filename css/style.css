@@ -267,17 +267,18 @@ a:visited, a:link{
     width: 100%;
     overflow: clip;
 }
-
+.desc{
+    position: sticky;
+    top:202px;
+}
 .description-produit{
     width:50%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     padding-top:57px;
     padding-left: 4rem;
     padding-right: 4rem;
-    overflow-x: hidden;
-    position:sticky;
+    position:relative;
 }
 .mainDesc{
     border-bottom: black;
@@ -472,9 +473,15 @@ a:visited, a:link{
     width:20px;
     height: 20px;
 }
-.color:hover{
+.filterColor{
+    margin: 0;
+    border-radius: 100%;
+    border:solid 1px dimgrey;
+    width: 15px;
+    height: 15px;
+}
+.color:hover, .filterColor:hover{
     border: black 2px solid;
-
 }
 #Mauve{
     background-color: blueviolet;
@@ -491,9 +498,16 @@ a:visited, a:link{
 #Jaune{
     background-color: yellow;
 }
+#Noir{
+    background-color: black;
+}
 .description-produit hr{
     border: 1px solid #bbbbbb;
     width:100%;
+}
+.clrBox{
+    display: flex;
+    align-items: center;
 }
 
 

@@ -1,81 +1,115 @@
 <?php
-// Connexion à la base de données
-$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
+require "header.php";
 
 // Récupération des filtres
-$type = isset($_GET['type']) ? $_GET['type'] : '';
-$taille = isset($_GET['taille']) ? $_GET['taille'] : '';
-$couleur = isset($_GET['couleur']) ? $_GET['couleur'] : '';
+$type = isset($_GET['type']) ? array_filter($_GET['type']) : [];
+$taille = isset($_GET['taille']) ? array_filter($_GET['taille'] ): [];
+$couleur = isset($_GET['couleur']) ? array_filter($_GET['couleur']) : [];
 $prix_min = isset($_GET['prix_min']) ? $_GET['prix_min'] : 0;
 $prix_max = isset($_GET['prix_max']) ? $_GET['prix_max'] : 9999;
 
 // Construction de la requête avec les filtres
 $query = "SELECT * FROM produits WHERE 1=1";
-if ($type) {
-    $query .= " AND type = :type";
+if (!empty($type)) {
+    $placeholders = implode(',', array_fill(0, count($type), '?'));
+    $query .= " AND type IN ($placeholders)";
 }
-if ($taille) {
-    $taille = "%$taille%";
-    $query .= " AND taille LIKE :taille";
+if (!empty($taille)) {
+    foreach ($taille as $key => $size) {
+        $query .= " AND taille LIKE ?";
+        $taille[$key] = "%$size %";
+    }
 }
-if ($couleur) {
-    $couleur = "%$couleur%";
-    $query .= " AND couleur LIKE :couleur";
+if (!empty($couleur)) {
+    foreach ($couleur as $key => $color) {
+        $query .= " AND couleur LIKE ?";
+        $couleur[$key] = "%$color %";
+    }
 }
-$query .= " AND prix BETWEEN :prix_min AND :prix_max";
+$query .= " AND prix BETWEEN ? AND ?";
 
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(':prix_min', $prix_min);
-$stmt->bindParam(':prix_max', $prix_max);
-if ($type) {
-    $stmt->bindParam(':type', $type);
+$i = 1;
+foreach ($type as $value) {
+    $stmt->bindValue($i++, $value);
 }
-if ($taille) {
-    $stmt->bindParam(':taille', $taille);
+
+foreach ($taille as $value) {
+    $stmt->bindValue($i++, $value);
 }
-if ($couleur) {
-    $stmt->bindParam(':couleur', $couleur);
+
+foreach ($couleur as $value) {
+    $stmt->bindValue($i++, $value);
 }
+
+$stmt->bindValue($i++, $prix_min, PDO::PARAM_INT);
+$stmt->bindValue($i++, $prix_max, PDO::PARAM_INT);
+
+
 $stmt->execute();
 $produits = $stmt->fetchAll();
 ?>
 
-<?php
-require "header.php";
-?>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form class='filterForm' method="GET" action="catalogue.php">
         <h3>FILTER</h3>
         <label for="type">TYPE :</label>
         <div class="typeChkbx">
-            <input type="checkbox" name="tous" id="tous" value="">
-            <label for="tous">TOUS</label>
-            <br>
-            <input type="checkbox" name="chemise" id="chemise" value="chemise">
+            <input type="checkbox" name="type[]" id="chemise" value="chemise">
             <label for="chemise">CHEMISE</label>
             <br>
-            <input type="checkbox" name="cravate" id="cravate" value="cravate">
+            <input type="checkbox" name="type[]" id="cravate" value="cravate">
             <label for="cravate">CRAVATE</label>
         </div>
-        <div class="tailleChkbx">
-            
-        </div>
-        <select name="type" id="type">
-            <option value="">TOUS</option>
-            <option value="cravate">CRAVATES</option>
-            <option value="chemise">CHEMISES</option>
-        </select>
         <label for="taille">TAILLE :</label>
-        <select name="taille" id="taille">
-            <option value="">TOUTES</option>
-            <option value="O/S">O/S</option>
-            <?php for ($i = 44; $i <= 56; $i += 2): ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
-            <?php endfor; ?>
-        </select>
+        <div class="tailleChkbx">
+            <input type="checkbox" name="taille[]" id="O/S" value="O/S">
+            <label for="O/S">O/S</label>
+            <br>
+            <?php for($i = 44; $i <= 56; $i += 2){
+                echo "<input type='checkbox' name='taille[]' id='{$i}' value='{$i}'><label for='{$i}'>{$i}</label><br>";
+            }
+            ?>
+        </div>
         <label for="couleur">COULEUR :</label>
-        <input type="text" name="couleur" id="couleur">
+        <div class="couleurChkbx">
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Rose" id="rose">
+                <div class="filterColor" id="Rose"></div>
+                <label for="rose">Rose</label>
+            </div>
+             <div class="clrBox">
+                 <input type="checkbox" name="couleur[]" value="Bleu" id="Bleu">
+                 <div class="filterColor" id="Bleu"></div>
+                 <label for="bleu">Bleu</label>
+            </div>
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Noir" id="Noir">
+                <div class="filterColor" id="Noir"></div>
+                <label for="noir">Noir</label>
+            </div>
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Blanc" id="Blanc">
+                <div class="filterColor"></div>
+                <label for="Blanc">Blanc</label>
+            </div>
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Mauve" id="Mauve">
+                <div class="filterColor" id="Mauve"></div>
+                <label for="Mauve">Mauve</label>
+            </div>
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Vert" id="Vert">
+                <div class="filterColor" id="Vert"></div>
+                <label for="Vert">Vert</label>
+            </div>
+            <div class="clrBox">
+                <input type="checkbox" name="couleur[]" value="Jaune" id="Jaune">
+                <div class="filterColor" id="Jaune"></div>
+                <label for="Jaune">Jaune</label>
+            </div>
+        </div>
         <label for="prix_min">PRIX MIN :</label>
         <input type="number" name="prix_min" id="prix_min" value="0">
         <label for="prix_max">PRIX MAX :</label>
@@ -88,8 +122,8 @@ require "header.php";
 <div class="sort">
     <h3>PRODUIT</h3>
     <a href="catalogue.php">Afficher Tous</a>
-    <a href="catalogue.php?type=chemise">Chemises</a>
-    <a href="catalogue.php?type=cravate">Cravates</a>
+    <a href="catalogue.php?type%5B%5D=chemise">Chemises</a>
+    <a href="catalogue.php?type%5B%5D=cravate">Cravates</a>
 </div>
 <hr>
 <div class="filterSort">
@@ -111,7 +145,7 @@ require "header.php";
 </div>
 <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "300px";
         document.getElementById("myOverlay").classList.add("active");
     }
 

@@ -1,21 +1,16 @@
 <?php
-global $pdo;
+require_once "db.php";
 session_start(); // Assurez-vous que la session est démarrée
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['loginBtn'])) {
         header('Location: login.php');
         exit();
     }
-    
     if (isset($_POST['registerBtn'])) {
         header('Location: signup.php');
         exit();
     }
 }
-
-$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
-
 // Vérifiez si l'utilisateur est connecté
 $utilisateurConnecte = false;
 $nomUtilisateur = '';

@@ -1,8 +1,6 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
-session_start();
 include 'header.php';
-
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $courriel = $_POST['courriel'];
     $mot_de_passe = $_POST['mot_de_passe'];

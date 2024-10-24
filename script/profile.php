@@ -1,8 +1,6 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=catalogue_produits', 'root', '1234');
-session_start();
 include 'header.php';
-
+session_start();
 if (!isset($_SESSION['utilisateur_id'])) {
     header("Location: login.php");
     exit();

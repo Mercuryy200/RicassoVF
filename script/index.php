@@ -1,6 +1,5 @@
 <?php
 require "header.php";
-
 ?>
     <h2>COLLECTION ÉTÉ EN SOIE</h2>
     <!-- Slideshow container -->
